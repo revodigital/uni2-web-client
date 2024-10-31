@@ -56,7 +56,7 @@ const MapContainer = ({ mapBoxToken, defaultView, inputHtmlArray }: any) => {
 		mapRef.current.markers = []
 
 		// Aggiungi nuovi marker
-		pointsData.forEach((point: any) => {
+		pointsData?.forEach((point: any) => {
 			const marker = new mapboxgl.Marker({ draggable: true }).setLngLat(point.coordinates).addTo(mapRef.current)
 
 			marker.on('dragend', (event) => handleMarkerDragEnd(event, point.id))
