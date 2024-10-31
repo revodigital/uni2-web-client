@@ -67,6 +67,7 @@ const MapContainer = ({ mapBoxToken, defaultView, inputHtmlArray }: any) => {
 						</Marker>
 					))}
 
+				<NavigationControl position="top-right" />
 				<Box sx={{ position: 'absolute', bottom: 25, left: 'calc(50% - 24px)' }}>
 					<Button variant="contained" onClick={removeAllPin}>
 						Elimina pin
