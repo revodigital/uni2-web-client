@@ -2,7 +2,7 @@
 import mbxGeocoding from '@mapbox/mapbox-sdk/services/geocoding'
 import { useForm } from '@tanstack/react-form'
 
-const useMapContainer = (pointsData: any[], setPointsData: any, mapBoxToken: any, inputHtmlArray: any, setViewport: any) => {
+const useMapContainer = (pointsData: any[], setPointsData: any, mapBoxToken: any, inputHtmlArray: any, mapRef: any) => {
 	const initialState: any = {}
 	inputHtmlArray?.forEach((el: any, index: any) => {
 		initialState[`name${el.elementIndex + 1}`] = null
@@ -48,7 +48,7 @@ const useMapContainer = (pointsData: any[], setPointsData: any, mapBoxToken: any
 
 	// Funzione per aggiornare le coordinate del marker trascinato
 	const handleMarkerDragEnd = async (event: any, id: number) => {
-		const { lng, lat } = event.lngLat
+		const { lng, lat } = event.target.getLngLat()
 
 		// Aggiorna le coordinate del marker nel stato
 		setPointsData((prevPoints: any) =>
@@ -140,14 +140,10 @@ const useMapContainer = (pointsData: any[], setPointsData: any, mapBoxToken: any
 			const maxLon = Math.max(...lons)
 			const minLat = Math.min(...lats)
 			const maxLat = Math.max(...lats)
-
-			// Imposta il centro e il livello di zoom per adattarsi a tutti i punti
-			const newViewport = {
-				longitude: (minLon + maxLon) / 2,
-				latitude: (minLat + maxLat) / 2,
+			mapRef.current.flyTo({
+				center: [(minLon + maxLon) / 2, (minLat + maxLat) / 2],
 				zoom: calculateZoomLevel(minLon, maxLon, minLat, maxLat)
-			}
-			setViewport(newViewport)
+			})
 		}
 	}
 
