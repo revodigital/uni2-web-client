@@ -1,0 +1,6 @@
+node_modules
+build
+dist
+
+vite.config.ts
+babel-plugin-macros.config.js

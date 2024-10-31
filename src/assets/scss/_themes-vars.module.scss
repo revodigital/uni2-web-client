@@ -1,0 +1,310 @@
+// paper & background
+$paper: #ffffff;
+
+$white: #FFFFFF;
+$black: #000000;
+
+// primary
+$P0: $black;
+$P10: #0D391F;
+$P20: #176236;
+$P30: #208C4D;
+$P40: #2AB564;
+$P50: #3FD37D;
+$P60: #69DC99;
+$P70: #92E6B5;
+$P80: #BCEFD1;
+$P90: #D7F6E4;
+$P95: #E5F9ED;
+$P98: #F3FCF7;
+$P100: $white;
+
+// neutral
+$N0: $white;
+$N25: #F9F9F9;
+$N50: #F2F2F2;
+$N100: #E6E6E6;
+$N200: #CCC;
+$N300: #B3B3B3;
+$N400: #999;
+$N500: #808080;
+$N600: #666;
+$N700: #4D4D4D;
+$N800: #333;
+$N900: #191919;
+$N1000: $black;
+
+// error
+$errorLight: #FFE0E0;
+$errorMain: #DA2828;
+$errorDark: #960E0E;
+
+// success
+$successLight: #E1FFDF;
+$successMain: #32C129;
+$successDark: #126B0D;
+
+// warning
+$warningLight: #FFC;
+$warningMain: #EED33F;
+$warningDark: #716405;
+
+// Start Standard
+
+// primary
+$primaryLight: #E9F5FE;
+$primaryMain: #2196F3;
+$primaryDark: #0D3C61;
+$primary50: #E9F5FE;
+$primary100: #D3EAFD;
+$primary150: #BCE0FB;
+$primary200: #A6D5FA;
+$primary300: #7AC0F8;
+$primary400: #4DABF5;
+$primary500: #2196F3;
+$primary600: #1A78C2;
+$primary700: #145A92;
+$primary800: #0D3C61;
+$primary850: #0A2D49;
+$primary900: #071E31;
+$primary950: #030F18;
+
+// secondary
+$secondaryLight: #F0EBF8;
+$secondaryMain: #673AB7;
+$secondaryDark: #291749;
+$secondary50: #F0EBF8;
+$secondary100: #E1D8F1;
+$secondary150: #D1C4E9;
+$secondary200: #C2B0E2;
+$secondary300: #A489D4;
+$secondary400: #8561C5;
+$secondary500: #673AB7;
+$secondary600: #522E92;
+$secondary700: #3E236E;
+$secondary800: #291749;
+$secondary850: #1F1137;
+$secondary900: #150C25;
+$secondary950: #0A0612;
+
+// success Colors
+$success50: #E8FAF2;
+$success100: #D1F4E5;
+$success150: #BAEFD9;
+$success200: #A3E9CC;
+$success300: #74DFB2;
+$success400: #46D499;
+$success500: #18C97F;
+$success600: #13A166;
+$success700: #0E794C;
+$success800: #0A5033;
+$success850: #073C26;
+$success900: #052819;
+$success950: #02140D;
+
+// error
+$error50: #FFEDEB;
+$error100: #FEDCD7;
+$error150: #FECAC2;
+$error200: #FEB9AE;
+$error300: #FD9586;
+$error400: #FD725D;
+$error500: #FC4F35;
+$error600: #CB3F2A;
+$error700: #9B3020;
+$error800: #6A2015;
+$error850: #521810;
+$error900: #3A110B;
+$error950: #210905;
+
+// orange
+$orangeLight: #fbe9e7;
+$orangeMain: #ffab91;
+$orangeDark: #d84315;
+
+// warning
+$warning50: #FFFCE6;
+$warning100: #FEF9CE;
+$warning150: #FEF6B5;
+$warning200: #FEF39D;
+$warning300: #FDEC6C;
+$warning400: #FDE63B;
+$warning500: #FCE00A;
+$warning600: #CAB308;
+$warning700: #978606;
+$warning800: #655A04;
+$warning850: #4C4303;
+$warning900: #332A0B;
+$warning950: #191601;
+
+// grey
+$grey50: #F2F2F4;
+$grey100: #DFE1E5;
+$grey200: #B0B4BF;
+$grey300: #949AA8;
+$grey400: #787F91;
+$grey500: #515663;
+$grey600: #41454F;
+$grey700: #31343B;
+$grey800: #202228;
+$grey900: #101114;
+
+// ==============================|| THEME CONST ||============================== //
+
+$font-stack: Roboto, sans-serif;
+$border-radius: 7px;
+$kendo-button-font-size: 14px;
+$kendo-button-font-weight: 600;
+$kendo-border-input: 1.5px solid;
+$kendo-base-color-input: $P40;
+$kendo-base-color-background-input: $white;
+$kendo-error-color-background-input: $white;
+
+// ==============================|| JAVASCRIPT ||============================== //
+
+:export {
+  // paper & background
+  paper: $paper;
+
+  P0: $P0;
+  P10: $P10;
+  P20: $P20;
+  P30: $P30;
+  P40: $P40;
+  P50: $P50;
+  P60: $P60;
+  P70: $P70;
+  P80: $P80;
+  P90: $P90;
+  P95: $P95;
+  P98: $P98;
+  P100: $P100;
+
+  N0: $N0;
+  N25: $N25;
+  N50: $N50;
+  N100: $N100;
+  N200: $N200;
+  N300: $N300;
+  N400: $N400;
+  N500: $N500;
+  N600: $N600;
+  N700: $N700;
+  N800: $N800;
+  N900: $N900;
+  N1000: $N1000;
+
+  // Success
+  successLight: $successLight;
+  successMain: $successMain;
+  successDark: $successDark;
+
+  // Error
+  errorLight: $errorLight;
+  errorMain: $errorMain;
+  errorDark: $errorDark;
+
+  // Warning
+  warningLight: $warningLight;
+  warningMain: $warningMain;
+  warningDark: $warningDark;
+
+  // primary
+  primaryLight: $primaryLight;
+  primaryMain: $primaryMain;
+  primaryDark: $primaryDark;
+  primary50: $primary50;
+  primary100: $primary100;
+  primary150: $primary150;
+  primary200: $primary200;
+  primary300: $primary300;
+  primary400: $primary400;
+  primary500: $primary500;
+  primary600: $primary600;
+  primary700: $primary700;
+  primary800: $primary800;
+  primary850: $primary850;
+  primary900: $primary900;
+  primary950: $primary850;
+
+  // secondary
+  secondaryLight: $secondaryLight;
+  secondaryMain: $secondaryMain;
+  secondaryDark: $secondaryDark;
+  secondary50: $secondary50;
+  secondary100: $secondary100;
+  secondary150: $secondary150;
+  secondary200: $secondary200;
+  secondary300: $secondary300;
+  secondary400: $secondary400;
+  secondary500: $secondary500;
+  secondary600: $secondary600;
+  secondary700: $secondary700;
+  secondary800: $secondary800;
+  secondary850: $secondary850;
+  secondary900: $secondary900;
+  secondary950: $secondary950;
+
+  // success
+  success50: $success50;
+  success100: $success100;
+  success150: $success150;
+  success200: $success200;
+  success300: $success300;
+  success400: $success400;
+  success500: $success500;
+  success600: $success600;
+  success700: $success700;
+  success800: $success800;
+  success850: $success850;
+  success900: $success900;
+  success950: $success950;
+
+  // error
+  error50: $error50;
+  error100: $error100;
+  error150: $error150;
+  error200: $error200;
+  error300: $error300;
+  error400: $error400;
+  error500: $error500;
+  error600: $error600;
+  error700: $error700;
+  error800: $error800;
+  error850: $error850;
+  error900: $error900;
+  error950: $error950;
+
+  // orange
+  orangeLight: $orangeLight;
+  orangeMain: $orangeMain;
+  orangeDark: $orangeDark;
+
+  // warning
+  warning50: $warning50;
+  warning100: $warning100;
+  warning150: $warning150;
+  warning200: $warning200;
+  warning300: $warning300;
+  warning400: $warning400;
+  warning500: $warning500;
+  warning600: $warning600;
+  warning700: $warning700;
+  warning800: $warning800;
+  warning850: $warning850;
+  warning900: $warning900;
+  warning950: $warning950;
+
+  // grey
+  grey50: $grey50;
+  grey100: $grey100;
+  grey200: $grey200;
+  grey300: $grey300;
+  grey400: $grey400;
+  grey500: $grey500;
+  grey600: $grey600;
+  grey700: $grey700;
+  grey800: $grey800;
+  grey900: $grey900;
+
+}
