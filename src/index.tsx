@@ -3,7 +3,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import ThemeCustomization from './themes'
 import MapContainer from './views/map'
 import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { render } from 'react-dom'
 
 // ==============================|| REACT DOM RENDER  ||============================== //
 ;
@@ -38,20 +38,13 @@ import ReactDOM from 'react-dom/client'
 			elementIndex: index
 		}))
 
-		const shadowRoot = container.attachShadow({ mode: 'open' })
-		const style = document.createElement('style')
-		style.textContent = `
-      /* Inserisci qui i tuoi stili CSS, ad esempio importando i file CSS come stringhe */`
-		shadowRoot.appendChild(style)
-
-		const root = ReactDOM.createRoot(shadowRoot)
-
-		root.render(
+		render(
 			<React.StrictMode>
 				<ThemeCustomization>
 					<MapContainer mapBoxToken={accessToken} defaultView={options?.defaultView} inputHtmlArray={inputHtmlArray} />
 				</ThemeCustomization>
-			</React.StrictMode>
+			</React.StrictMode>,
+			document.getElementById(`MapContainer${target.id}`)
 		)
 		directionContainer.style.display = 'none'
 	}
