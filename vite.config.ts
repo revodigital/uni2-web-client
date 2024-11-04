@@ -30,7 +30,7 @@ export default defineConfig({
 	build: {
 		lib: {
 			entry: './src/index.tsx', // Punto di entrata del tuo bundle
-			name: 'MyBundle',                               // Nome globale per IIFE
+			name: 'QualtricsMapBoxLibrary',                               // Nome globale per IIFE
 			fileName: () => 'bundle.js',                    // Nome del file di output
 			formats: ['iife'],                               // Formato immediatamente invocato (IIFE)
 		},
