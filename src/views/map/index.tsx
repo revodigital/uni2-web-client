@@ -16,6 +16,7 @@ const MapContainer = ({ mapBoxToken, defaultView, inputHtmlArray }: any) => {
 			zoom: 13
 		}
 	)
+
 	const { reactForm, handleMapClick, handleMarkerDragEnd, removeAllPin, newMapView } = useMapContainer(
 		pointsData,
 		setPointsData,
