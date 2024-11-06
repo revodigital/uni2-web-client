@@ -40,7 +40,7 @@ const InputForm = <T, V>({
 					limit: 5,
 					types: ['place', 'locality', 'neighborhood', 'address', 'poi'],
 					countries: ['it'],
-					language: 'it'
+					language: ['it']
 				})
 				.send()
 
