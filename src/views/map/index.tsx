@@ -36,7 +36,7 @@ const MapContainer = ({ mapBoxToken, defaultView, inputHtmlArray }: any) => {
 							setPointsData={setPointsData}
 							inputName={inputName}
 							label={el.label}
-							htmlElement={el.htmlElement}
+							htmlElementId={el.htmlElementId}
 							mapBoxToken={mapBoxToken}
 							newMapView={newMapView}
 						/>

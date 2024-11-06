@@ -10,7 +10,7 @@ interface VehicleFormProps<T, V> {
 	setPointsData: any
 	inputName: any
 	label?: any
-	htmlElement?: any
+	htmlElementId?: any
 	mapBoxToken?: any
 	newMapView?: any
 }
@@ -20,7 +20,7 @@ const InputForm = <T, V>({
 	setPointsData,
 	inputName,
 	label,
-	htmlElement,
+	htmlElementId,
 	mapBoxToken,
 	newMapView
 }: VehicleFormProps<T, V>): ReactElement => {
@@ -74,7 +74,8 @@ const InputForm = <T, V>({
 
 							if (selectedOption && selectedOption.value) {
 								const [lng, lat] = selectedOption.value
-								htmlElement!.value = selectedOption.label
+								// TODO: Qua dovrà esserci il postMessage per far comunicare la modifica!!
+								// htmlElement!.value = selectedOption.label
 								setPointsData((prevPoints: any) => {
 									const existingPoint = prevPoints.find((point: any) => point.inputName === inputName)
 
@@ -91,12 +92,13 @@ const InputForm = <T, V>({
 											id: Date.now(),
 											coordinates: [lng, lat],
 											inputName,
-											inputHtml: htmlElement
+											inputHtmlId: htmlElementId
 										}
 									]
 								})
 							} else {
-								htmlElement!.value = ''
+								// TODO: Qua dovrà esserci il postMessage per far comunicare la modifica!!
+								// htmlElement!.value = ''
 								setPointsData((prevPoints: any) => prevPoints.filter((point: any) => point.inputName !== inputName))
 							}
 						}}
