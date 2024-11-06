@@ -75,6 +75,11 @@ const InputForm = <T, V>({
 							if (selectedOption && selectedOption.value) {
 								const [lng, lat] = selectedOption.value
 								// TODO: Qua dovrà esserci il postMessage per far comunicare la modifica!!
+								// eslint-disable-next-line no-restricted-globals
+								parent.postMessage(
+									{ action: 'updateInput', data: { inputId: htmlElementId, value: selectedOption.label } },
+									window.origin
+								)
 								// htmlElement!.value = selectedOption.label
 								setPointsData((prevPoints: any) => {
 									const existingPoint = prevPoints.find((point: any) => point.inputName === inputName)

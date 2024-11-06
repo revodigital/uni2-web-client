@@ -113,6 +113,8 @@ const useMapContainer = (pointsData: any[], setPointsData: any, mapBoxToken: any
 			reactForm.setFieldValue(inputName, newValue as any)
 			// Modifica il valore dell'input di Qualtrics
 			// TODO: Qua dovrà esserci il postMessage per far comunicare la modifica!!
+			// eslint-disable-next-line no-restricted-globals
+			parent.postMessage({ action: 'updateInput', data: { inputId: newPoint.inputHtmlId, value: newValue.label } }, window.origin)
 			// inputHtml!.value = newValue.label
 		}
 	}
@@ -156,6 +158,8 @@ const useMapContainer = (pointsData: any[], setPointsData: any, mapBoxToken: any
 		pointsData.forEach((point, i) => {
 			// Elimina i valori relativi agli input Qualtrics
 			// TODO: Qua dovrà esserci il postMessage per far comunicare la modifica vuota!!
+			// eslint-disable-next-line no-restricted-globals
+			parent.postMessage({ action: 'updateInput', data: { inputId: point.inputHtmlId, value: '' } }, window.origin)
 			// point.inputHtml!.value = ''
 		})
 		setPointsData([])

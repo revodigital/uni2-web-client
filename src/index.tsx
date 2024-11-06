@@ -41,14 +41,31 @@ function iframeRender(accessToken: any, target: HTMLElement, options: any) {
             <meta charset="utf-8" />
             <title>Map</title>
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-           <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     		<!-- Includi eventuali librerie per la mappa, ad esempio Mapbox -->
     		<link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" rel="stylesheet" type="text/css" />
     		<link href="https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.css" rel="stylesheet" />
     		
-    		<link href="https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.3.6/dist/style.css" rel="stylesheet" />
-    		<script src='https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.3.6/dist/bundle.js'></script>
+    		<link href="https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.3.8/dist/style.css" rel="stylesheet" />
+    		<script src='https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.3.8/dist/bundle.js'></script>
+    		<style>
+        		html, body {
+            		margin: 0;
+           			padding: 0;
+            		overflow: hidden;
+            		height: 100%;
+        		}
+        		#MapContainer${target.id} {
+            		margin: 0;
+            		padding: 0;
+            		width: 100%;
+            		height: 100%;
+        		}
+        		/* Optional: Apply box-sizing reset */
+        		*, *::before, *::after {
+            		box-sizing: border-box;
+        		}
+    		</style>
         </head>
         <body>
             <div id="MapContainer${target.id}"></div>
@@ -91,7 +108,8 @@ function iframeRender(accessToken: any, target: HTMLElement, options: any) {
 					inputElement.value = value
 				}
 			} else if (action === 'resizeIframe' && height) {
-				iframeContainer.style.height = `${height}px`
+				const newHeight = +height + 20
+				iframeContainer.style.height = `${newHeight}px`
 			}
 		},
 		false
