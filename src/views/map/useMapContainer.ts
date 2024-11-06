@@ -1,12 +1,17 @@
 // @ts-ignore
 import mbxGeocoding from '@mapbox/mapbox-sdk/services/geocoding'
 import { useForm } from '@tanstack/react-form'
+import { useEffect, useState } from 'react'
 
 const useMapContainer = (pointsData: any[], setPointsData: any, mapBoxToken: any, inputHtmlArray: any, mapRef: any) => {
-	const initialState: any = {}
+	const [initialState, setInitialState] = useState({})
+	const [loadingPage, setLoadingPage] = useState(true)
+	/*
 	inputHtmlArray?.forEach((el: any, index: any) => {
 		initialState[`name${el.elementIndex + 1}`] = null
 	})
+	 */
+
 	const reactForm = useForm({
 		defaultValues: {
 			...initialState
@@ -22,6 +27,33 @@ const useMapContainer = (pointsData: any[], setPointsData: any, mapBoxToken: any
 			}
 		}
 		return null
+	}
+
+	// Funzione per eseguire il geocoding di un indirizzo
+	const geocodeAddress = async (address: string) => {
+		try {
+			const response = await geocodingClient
+				.forwardGeocode({
+					query: address,
+					limit: 1,
+					types: ['place', 'address', 'locality', 'neighborhood', 'poi'],
+					countries: ['it']
+				})
+				.send()
+
+			const data = response.body
+			if (data && data.features && data.features.length > 0) {
+				const feature = data.features[0]
+				return {
+					address: feature.place_name,
+					coordinates: feature.geometry.coordinates
+				}
+			}
+			return null
+		} catch (error) {
+			console.error("Errore nel geocoding dell'indirizzo:", error)
+			return null
+		}
 	}
 
 	const reverseGeocode = async (lng: any, lat: any) => {
@@ -65,6 +97,7 @@ const useMapContainer = (pointsData: any[], setPointsData: any, mapBoxToken: any
 					label: address,
 					value: [lng, lat]
 				}
+				// @ts-ignore
 				reactForm.setFieldValue(point.inputName, newValue)
 				// Modifica il valore dell'input di Qualtrics
 				// TODO: Qua dovrà esserci il postMessage per far comunicare la modifica!!
@@ -110,6 +143,7 @@ const useMapContainer = (pointsData: any[], setPointsData: any, mapBoxToken: any
 				value: [lng, lat]
 			}
 			// Aggiorna il campo di input con il nuovo indirizzo
+			// @ts-ignore
 			reactForm.setFieldValue(inputName, newValue as any)
 			// Modifica il valore dell'input di Qualtrics
 			// TODO: Qua dovrà esserci il postMessage per far comunicare la modifica!!
@@ -165,12 +199,62 @@ const useMapContainer = (pointsData: any[], setPointsData: any, mapBoxToken: any
 		setPointsData([])
 	}
 
+	useEffect(() => {
+		const initialize = async () => {
+			const newInitialFormValues: any = {}
+			const newPointsData: any[] = []
+
+			for (const el of inputHtmlArray) {
+				const inputName = `name${el.elementIndex + 1}`
+				if (el.inputValueAddress) {
+					// Esegui il geocoding dell'indirizzo
+					const address = el.inputValueAddress
+					const geocodedData = await geocodeAddress(address)
+					if (geocodedData) {
+						const [lng, lat] = geocodedData.coordinates
+						// Imposta il valore iniziale nel form
+						newInitialFormValues[inputName] = {
+							label: geocodedData.address,
+							value: [lng, lat]
+						}
+						// Aggiungi il marker ai punti
+						newPointsData.push({
+							id: Date.now() + Math.random(), // Assicura un ID univoco
+							coordinates: [lng, lat],
+							inputName,
+							inputHtmlId: el.htmlElementId
+						})
+					} else {
+						// Se il geocoding non ha successo, imposta il valore a null
+						newInitialFormValues[inputName] = null
+					}
+				} else {
+					// Se non c'è un indirizzo, imposta il valore a null
+					newInitialFormValues[inputName] = null
+				}
+			}
+
+			// Imposta i valori nel form
+			setInitialState(newInitialFormValues)
+			// Aggiorna lo stato dei punti
+			setPointsData(newPointsData)
+			// Aggiorna la vista della mappa per includere i nuovi marker
+			if (newPointsData.length > 0) {
+				newMapView()
+			}
+			setLoadingPage(false)
+		}
+
+		initialize()
+	}, [])
+
 	return {
 		reactForm,
 		handleMapClick,
 		handleMarkerDragEnd,
 		removeAllPin,
-		newMapView
+		newMapView,
+		loadingPage
 	}
 }
 
