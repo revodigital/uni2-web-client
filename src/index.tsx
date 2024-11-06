@@ -26,6 +26,12 @@ function iframeRender(accessToken: any, target: HTMLElement, options: any) {
 		elementIndex: index
 	}))
 
+	const presentationElements = target.querySelectorAll('[role*=presentation]')
+	if (presentationElements.length > 0) {
+		// @ts-ignore
+		presentationElements[0].style.display = 'none'
+	}
+
 	const iframeDoc = iframeContainer.contentWindow?.document
 	iframeDoc?.open()
 	iframeDoc?.write(`
@@ -46,32 +52,18 @@ function iframeRender(accessToken: any, target: HTMLElement, options: any) {
         </head>
         <body>
             <div id="MapContainer${target.id}"></div>
-           <script>
-        window.addEventListener('message', function(event) {
-          // Verifica l'origine del messaggio per motivi di sicurezza
-          // Se l'iframe e il parent sono dello stesso dominio, puoi omettere questa verifica
-          // if (event.origin !== 'http://tuo-dominio.com') return;
-
-          const { accessToken, options, target, inputHtmlArray } = event.data;
-
-          if (accessToken && options && target) {
-            // 1. Nascondi il primo elemento con role che contiene 'presentation' all'interno di #QID5
-            const presentationElements = target.querySelectorAll('[role*=presentation]');
-            if (presentationElements.length > 0) {
-              presentationElements[0].style.display = 'none';
-            }
-
-            // 2. Inizializza la mappa con pin predefiniti
-            mapRender(accessToken, target, inputHtmlArray, options);
-          }
-        }, false);
-      </script>
+           	<script>
+        		window.addEventListener('message', function(event) {
+          			const { accessToken, options, targetId, inputHtmlArray } = event.data
+          			if (accessToken && options && targetId) mapRender(accessToken, targetId, inputHtmlArray, options)
+        		}, false)
+      		</script>
         </body>
         </html>
     `)
 	iframeDoc?.close()
 	iframeContainer.onload = () => {
-		iframeContainer.contentWindow?.postMessage({ accessToken, options, target, inputHtmlArray }, '*')
+		iframeContainer.contentWindow?.postMessage({ accessToken, options, targetId: target.id, inputHtmlArray }, '*')
 		// Nota: Sostituisci '*' con l'origine specifica per maggiore sicurezza
 	}
 	directionContainer.style.display = 'none'
@@ -96,7 +88,7 @@ function iframeRender(accessToken: any, target: HTMLElement, options: any) {
 
 const mapRender = (
 	accessToken: string,
-	target: HTMLElement,
+	targetId: any,
 	inputHtmlArray: any[],
 	options?: {
 		defaultView?: {
@@ -112,7 +104,7 @@ const mapRender = (
 				<MapContainer mapBoxToken={accessToken} defaultView={options?.defaultView} inputHtmlArray={inputHtmlArray} />
 			</ThemeCustomization>
 		</React.StrictMode>,
-		document.getElementById(`MapContainer${target.id}`)
+		document.getElementById(`MapContainer${targetId}`)
 	)
 }
 ;(window as any).mapRender = mapRender
