@@ -104,6 +104,8 @@ const InputForm = <T, V>({
 							} else {
 								// TODO: Qua dovrà esserci il postMessage per far comunicare la modifica!!
 								// htmlElement!.value = ''
+								// eslint-disable-next-line no-restricted-globals
+								parent.postMessage({ action: 'updateInput', data: { inputId: htmlElementId, value: '' } }, window.origin)
 								setPointsData((prevPoints: any) => prevPoints.filter((point: any) => point.inputName !== inputName))
 							}
 						}}
