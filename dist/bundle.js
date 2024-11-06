@@ -522,6 +522,23 @@ You might need to use a local HTTP server (instead of file://): https://reactjs.
     		
     		<link href="https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.3.93/dist/style.css" rel="stylesheet" />
     		<script src='https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.3.93/dist/bundle.js'><\/script>
+    		<style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                height: 100%;
+            }
+            #MapContainer${g.id} {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+            }
+            *, *::before, *::after {
+                box-sizing: border-box;
+            }
+        </style>
         </head>
         <body>
             <div id="MapContainer${g.id}"></div>
