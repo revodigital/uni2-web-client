@@ -520,23 +520,10 @@ You might need to use a local HTTP server (instead of file://): https://reactjs.
     		<link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" rel="stylesheet" type="text/css" />
     		<link href="https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.css" rel="stylesheet" />
     		
-    		<link href="https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.3.96/dist/style.css" rel="stylesheet" />
-    		<script src='https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.3.96/dist/bundle.js'><\/script>
+    		<link href="https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.3.97/dist/style.css" rel="stylesheet" />
+    		<script src='https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.3.97/dist/bundle.js'><\/script>
     		<style>
-            html, body {
-                margin: 0;
-                padding: 0;
-                overflow: hidden;
-                height: 100%;
-            }
-            #MapContainer${g.id} {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-            }
-            *, *::before, *::after {
-                box-sizing: border-box;
-            }
+           
         </style>
         </head>
         <body>
