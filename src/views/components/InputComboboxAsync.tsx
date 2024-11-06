@@ -80,7 +80,7 @@ const InputComboboxAsync = (fieldRenderProps: InputComboboxAsyncProps) => {
 					}}
 					loading={loading}
 					loadingText="Caricamento in corso.."
-					noOptionsText="Nessun'opzione disponibile"
+					noOptionsText="Scrivi un indirizzo per ricevere dei suggerimenti"
 					renderTags={(value: any[], getTagProps) =>
 						value.map((option: any, index: number) => {
 							const { key, ...tagProps } = getTagProps({ index })
