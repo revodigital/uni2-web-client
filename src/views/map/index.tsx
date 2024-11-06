@@ -25,7 +25,7 @@ const MapContainer = ({ mapBoxToken, defaultView, inputHtmlArray }: any) => {
 		setViewport
 	)
 	return (
-		<Box sx={{ p: '60px' }}>
+		<Box>
 			<Box sx={{ width: '100%', pb: 3 }}>
 				{/* Da inserire ancora il ciclo for */}
 				{inputHtmlArray.map((el: any, index: any) => {
@@ -67,7 +67,7 @@ const MapContainer = ({ mapBoxToken, defaultView, inputHtmlArray }: any) => {
 							<img alt="marker" src={markerMap} style={{ height: '50px', width: 'auto' }} />
 						</Marker>
 					))}
-
+				<NavigationControl position="top-right" />
 				<Box sx={{ position: 'absolute', bottom: 25, left: 'calc(50% - 24px)' }}>
 					<Button variant="contained" onClick={removeAllPin}>
 						Elimina pin
@@ -78,5 +78,4 @@ const MapContainer = ({ mapBoxToken, defaultView, inputHtmlArray }: any) => {
 	)
 }
 
-// <NavigationControl position="top-right" />
 export default MapContainer

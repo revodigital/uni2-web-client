@@ -10,7 +10,7 @@ import { render } from 'react-dom'
 function iframeRender(accessToken: any, target: HTMLElement, options: any) {
 	const iframeContainer = document.createElement('iframe')
 	iframeContainer.style.width = '100%'
-	iframeContainer.style.height = '500px'
+	// iframeContainer.style.height = '500px'
 	iframeContainer.style.border = 'none'
 	iframeContainer.id = `${target.id}iframe`
 
@@ -47,15 +47,25 @@ function iframeRender(accessToken: any, target: HTMLElement, options: any) {
     		<link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" rel="stylesheet" type="text/css" />
     		<link href="https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.css" rel="stylesheet" />
     		
-    		<link href="https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.3.5/dist/style.css" rel="stylesheet" />
-    		<script src='https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.3.5/dist/bundle.js'></script>
+    		<link href="https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.3.6/dist/style.css" rel="stylesheet" />
+    		<script src='https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.3.6/dist/bundle.js'></script>
         </head>
         <body>
             <div id="MapContainer${target.id}"></div>
            	<script>
+           		function sendHeightToParent() {
+                    const height = document.body.scrollHeight;
+                    parent.postMessage({ action: 'resizeIframe', height }, '*');
+                }
+                window.addEventListener('load', sendHeightToParent);
+                window.addEventListener('resize', sendHeightToParent);
+                
         		window.addEventListener('message', function(event) {
           			const { accessToken, options, targetId, inputHtmlArray } = event.data
-          			if (accessToken && options && targetId) mapRender(accessToken, targetId, inputHtmlArray, options)
+          			if (accessToken && options && targetId){ 
+                    	mapRender(accessToken, targetId, inputHtmlArray, options)
+                    	sendHeightToParent()
+                    }
         		}, false)
       		</script>
         </body>
@@ -72,7 +82,7 @@ function iframeRender(accessToken: any, target: HTMLElement, options: any) {
 		'message',
 		function (event) {
 			if (event.origin !== window.origin) return
-			const { action, data } = event.data
+			const { action, data, height } = event.data
 
 			if (action === 'updateInput') {
 				const { inputId, value } = data
@@ -80,6 +90,8 @@ function iframeRender(accessToken: any, target: HTMLElement, options: any) {
 				if (inputElement) {
 					inputElement.value = value
 				}
+			} else if (action === 'resizeIframe' && height) {
+				iframeContainer.style.height = `${height}px`
 			}
 		},
 		false
