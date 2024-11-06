@@ -39,7 +39,8 @@ const InputForm = <T, V>({
 					autocomplete: true,
 					limit: 5,
 					types: ['place', 'locality', 'neighborhood', 'address', 'poi'],
-					countries: ['it']
+					countries: ['it'],
+					language: 'it'
 				})
 				.send()
 

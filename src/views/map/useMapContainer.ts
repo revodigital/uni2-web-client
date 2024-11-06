@@ -37,7 +37,8 @@ const useMapContainer = (pointsData: any[], setPointsData: any, mapBoxToken: any
 					query: address,
 					limit: 1,
 					types: ['place', 'address', 'locality', 'neighborhood', 'poi'],
-					countries: ['it']
+					countries: ['it'],
+					language: 'it'
 				})
 				.send()
 
@@ -63,7 +64,8 @@ const useMapContainer = (pointsData: any[], setPointsData: any, mapBoxToken: any
 					query: [lng, lat],
 					limit: 1,
 					types: ['place', 'address', 'locality', 'neighborhood', 'poi'],
-					countries: ['it']
+					countries: ['it'],
+					language: 'it'
 				})
 				.send()
 
