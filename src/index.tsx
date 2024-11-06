@@ -46,14 +46,14 @@ function iframeRender(accessToken: any, target: HTMLElement, options: any) {
     		<link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" rel="stylesheet" type="text/css" />
     		<link href="https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.css" rel="stylesheet" />
     		
-    		<link href="https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.3.92/dist/style.css" rel="stylesheet" />
-    		<script src='https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.3.92/dist/bundle.js'></script>
+    		<link href="https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.3.93/dist/style.css" rel="stylesheet" />
+    		<script src='https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.3.93/dist/bundle.js'></script>
         </head>
         <body>
             <div id="MapContainer${target.id}"></div>
            	<script>
            		function sendHeightToParent() {
-                    let height = document.documentElement.scrollHeight + 1;
+                    let height = document.documentElement.offsetHeight;
                     parent.postMessage({ action: 'resizeIframe', height }, '*');
                 }
                 window.addEventListener('load', sendHeightToParent);
