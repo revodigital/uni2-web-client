@@ -520,34 +520,28 @@ You might need to use a local HTTP server (instead of file://): https://reactjs.
     		<link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" rel="stylesheet" type="text/css" />
     		<link href="https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.css" rel="stylesheet" />
     		
-    		<link href="https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.4.0/dist/style.css" rel="stylesheet" />
-    		<script src='https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.4.0/dist/bundle.js'><\/script>
+    		<link href="https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.4.01/dist/style.css" rel="stylesheet" />
+    		<script src='https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.4.01/dist/bundle.js'><\/script>
     		<style>
            
         </style>
         </head>
         <body>
             <div id="MapContainer${g.id}"></div>
-           	<script>
-           		function sendHeightToParent() {
-                    let height = document.documentElement.scrollHeight;
-                    parent.postMessage({ action: 'resizeIframe', height }, '*');
-                }
-                // window.addEventListener('load', sendHeightToParent);
+           	<script>          	
                 const resizeObserver = new ResizeObserver(entries => {
     				for (let entry of entries) {
         				const height = entry.contentRect.height + 1;
         				parent.postMessage({ action: 'resizeIframe', height }, '*');
     				}
-				});
+				})
 
-				resizeObserver.observe(document.body);
+				resizeObserver.observe(document.body)
                 
         		window.addEventListener('message', function(event) {
           			const { accessToken, options, targetId, inputHtmlArray } = event.data
           			if (accessToken && options && targetId){ 
-                    	mapRender(accessToken, targetId, inputHtmlArray, options)
-                    	sendHeightToParent()
+                    	mapRender(accessToken, targetId, inputHtmlArray, options)                   
                     }
         		}, false)
       		<\/script>
