@@ -17,7 +17,7 @@ const MapContainer = ({ mapBoxToken, defaultView, inputHtmlArray }: any) => {
 		}
 	)
 
-	const { reactForm, handleMapClick, handleMarkerDragEnd, removeAllPin, newMapView, loadingPage } = useMapContainer(
+	const { reactForm, handleMapClick, handleMarkerDragEnd, removeAllPin, loadingPage } = useMapContainer(
 		pointsData,
 		setPointsData,
 		mapBoxToken,
@@ -40,7 +40,7 @@ const MapContainer = ({ mapBoxToken, defaultView, inputHtmlArray }: any) => {
 									label={el.label}
 									htmlElementId={el.htmlElementId}
 									mapBoxToken={mapBoxToken}
-									newMapView={newMapView}
+									setViewport={setViewport}
 								/>
 							)
 						})}

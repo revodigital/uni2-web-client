@@ -12,7 +12,7 @@ interface VehicleFormProps<T, V> {
 	label?: any
 	htmlElementId?: any
 	mapBoxToken?: any
-	newMapView?: any
+	setViewport?: any
 }
 
 const InputForm = <T, V>({
@@ -22,7 +22,7 @@ const InputForm = <T, V>({
 	label,
 	htmlElementId,
 	mapBoxToken,
-	newMapView
+	setViewport
 }: VehicleFormProps<T, V>): ReactElement => {
 	const geocodingClient = mbxGeocoding({ accessToken: mapBoxToken })
 
@@ -81,6 +81,9 @@ const InputForm = <T, V>({
 									{ action: 'updateInput', data: { inputId: htmlElementId, value: selectedOption.label } },
 									window.origin
 								)
+								setViewport((prevViewport: any) => {
+									return { ...prevViewport, longitude: lng, latitude: lat }
+								})
 								// htmlElement!.value = selectedOption.label
 								setPointsData((prevPoints: any) => {
 									const existingPoint = prevPoints.find((point: any) => point.inputName === inputName)

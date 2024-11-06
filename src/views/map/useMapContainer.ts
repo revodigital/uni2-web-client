@@ -6,11 +6,6 @@ import { useEffect, useState } from 'react'
 const useMapContainer = (pointsData: any[], setPointsData: any, mapBoxToken: any, inputHtmlArray: any, mapRef: any) => {
 	const [initialState, setInitialState] = useState({})
 	const [loadingPage, setLoadingPage] = useState(true)
-	/*
-	inputHtmlArray?.forEach((el: any, index: any) => {
-		initialState[`name${el.elementIndex + 1}`] = null
-	})
-	 */
 
 	const reactForm = useForm({
 		defaultValues: {
