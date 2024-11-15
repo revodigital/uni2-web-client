@@ -40,7 +40,9 @@ const InputForm = <T, V>({
 					limit: 5,
 					types: ['place', 'locality', 'neighborhood', 'address', 'poi'],
 					countries: ['it'],
-					language: ['it']
+					language: ['it'],
+					bbox: '11.2205,44.4044,11.4725,44.5840',
+					proximity: '44.4942,11.3465'
 				})
 				.send()
 
