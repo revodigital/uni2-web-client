@@ -3,7 +3,16 @@ import mbxGeocoding from '@mapbox/mapbox-sdk/services/geocoding'
 import { useForm } from '@tanstack/react-form'
 import { useEffect, useState } from 'react'
 
-const useMapContainer = (pointsData: any[], setPointsData: any, mapBoxToken: any, inputHtmlArray: any, mapRef: any) => {
+const useMapContainer = (
+	pointsData: any[],
+	setPointsData: any,
+	mapBoxToken: any,
+	boundaries: { min: number[]; max: number[] },
+	proximity: number[],
+	language: string,
+	inputHtmlArray: any,
+	mapRef: any
+) => {
 	const [initialState, setInitialState] = useState({})
 	const [loadingPage, setLoadingPage] = useState(true)
 
@@ -24,6 +33,10 @@ const useMapContainer = (pointsData: any[], setPointsData: any, mapBoxToken: any
 		return null
 	}
 
+	const lang = language ? [language] : ['it']
+	const bbox = boundaries ? [...boundaries.min, ...boundaries.max] : [11.2836, 44.4493, 11.4094, 44.5391]
+	const prox = proximity ?? [11.3465, 44.4942]
+
 	// Funzione per eseguire il geocoding di un indirizzo
 	const geocodeAddress = async (address: string) => {
 		try {
@@ -33,9 +46,9 @@ const useMapContainer = (pointsData: any[], setPointsData: any, mapBoxToken: any
 					limit: 1,
 					types: ['place', 'address', 'locality', 'neighborhood', 'poi'],
 					countries: ['it'],
-					language: ['it'],
-					bbox: [11.2836, 44.4493, 11.4094, 44.5391],
-					proximity: [11.3465, 44.4942]
+					language: lang,
+					bbox,
+					proximity: prox
 				})
 				.send()
 
@@ -62,9 +75,9 @@ const useMapContainer = (pointsData: any[], setPointsData: any, mapBoxToken: any
 					limit: 1,
 					types: ['place', 'address', 'locality', 'neighborhood', 'poi'],
 					countries: ['it'],
-					language: ['it'],
-					bbox: [11.2836, 44.4493, 11.4094, 44.5391],
-					proximity: [11.3465, 44.4942]
+					language: lang,
+					bbox,
+					proximity: prox
 				})
 				.send()
 

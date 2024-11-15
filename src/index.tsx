@@ -113,12 +113,25 @@ const mapRender = (
 			latitude: number
 			zoom: number
 		}
+		language?: string
+		boundaries?: {
+			min?: number[]
+			max?: number[]
+		}
+		proximity?: number[]
 	}
 ) => {
 	render(
 		<React.StrictMode>
 			<ThemeCustomization>
-				<MapContainer mapBoxToken={accessToken} defaultView={options?.defaultView} inputHtmlArray={inputHtmlArray} />
+				<MapContainer
+					mapBoxToken={accessToken}
+					defaultView={options?.defaultView}
+					boundaries={options?.boundaries}
+					proximity={options?.proximity}
+					language={options?.language}
+					inputHtmlArray={inputHtmlArray}
+				/>
 			</ThemeCustomization>
 		</React.StrictMode>,
 		document.getElementById(`MapContainer${targetId}`)

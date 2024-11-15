@@ -5,13 +5,16 @@ import { FormApi, ReactFormApi } from '@tanstack/react-form'
 import mbxGeocoding from '@mapbox/mapbox-sdk/services/geocoding'
 import InputComboboxAsync from './InputComboboxAsync'
 
-interface VehicleFormProps<T, V> {
+interface InputFormProps<T, V> {
 	reactForm: FormApi<any, undefined> & ReactFormApi<any, undefined>
 	setPointsData: any
 	inputName: any
 	label?: any
 	htmlElementId?: any
 	mapBoxToken?: any
+	boundaries?: { min: number[]; max: number[] }
+	proximity?: number[]
+	language?: string
 	setViewport?: any
 }
 
@@ -22,8 +25,11 @@ const InputForm = <T, V>({
 	label,
 	htmlElementId,
 	mapBoxToken,
+	boundaries,
+	proximity,
+	language,
 	setViewport
-}: VehicleFormProps<T, V>): ReactElement => {
+}: InputFormProps<T, V>): ReactElement => {
 	const geocodingClient = mbxGeocoding({ accessToken: mapBoxToken })
 
 	const getClientDriverOptionArray = async (setOptions: any, active: any, valueDebounce: any) => {
@@ -31,6 +37,10 @@ const InputForm = <T, V>({
 			setOptions([])
 			return
 		}
+
+		const lang = language ? [language] : ['it']
+		const bbox = boundaries ? [...boundaries.min, ...boundaries.max] : [11.2836, 44.4493, 11.4094, 44.5391]
+		const prox = proximity ?? [11.3465, 44.4942]
 
 		try {
 			const response = await geocodingClient
@@ -40,9 +50,9 @@ const InputForm = <T, V>({
 					limit: 5,
 					types: ['place', 'locality', 'neighborhood', 'address', 'poi'],
 					countries: ['it'],
-					language: ['it'],
-					bbox: [11.2836, 44.4493, 11.4094, 44.5391],
-					proximity: [11.3465, 44.4942]
+					language: lang,
+					bbox,
+					proximity: prox
 				})
 				.send()
 

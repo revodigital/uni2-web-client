@@ -5,7 +5,7 @@ import markerMap from '../../assets/img/map/marker.svg'
 import InputForm from '../components/InputForm'
 import useMapContainer from './useMapContainer'
 
-const MapContainer = ({ mapBoxToken, defaultView, inputHtmlArray }: any) => {
+const MapContainer = ({ mapBoxToken, defaultView, boundaries, proximity, language, inputHtmlArray }: any) => {
 	const mapRef = useRef<any>()
 	const [pointsData, setPointsData] = useState<any>([])
 
@@ -21,6 +21,9 @@ const MapContainer = ({ mapBoxToken, defaultView, inputHtmlArray }: any) => {
 		pointsData,
 		setPointsData,
 		mapBoxToken,
+		boundaries,
+		proximity,
+		language,
 		inputHtmlArray,
 		setViewport
 	)
@@ -40,6 +43,9 @@ const MapContainer = ({ mapBoxToken, defaultView, inputHtmlArray }: any) => {
 									label={el.label}
 									htmlElementId={el.htmlElementId}
 									mapBoxToken={mapBoxToken}
+									boundaries={boundaries}
+									proximity={proximity}
+									language={language}
 									setViewport={setViewport}
 								/>
 							)
