@@ -62,7 +62,7 @@ const useMapContainer = (
 			}
 			return null
 		} catch (error) {
-			console.error("Errore nel geocoding dell'indirizzo:", error)
+			console.error("GEOCODE ERROR:", error)
 			return null
 		}
 	}
@@ -87,7 +87,7 @@ const useMapContainer = (
 			}
 			return null
 		} catch (error) {
-			console.error('Errore nel reverse geocoding:', error)
+			console.error('REVERSE GEOCODE ERROR:', error)
 			return null
 		}
 	}

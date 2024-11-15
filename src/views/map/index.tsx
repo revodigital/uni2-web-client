@@ -78,7 +78,7 @@ const MapContainer = ({ mapBoxToken, defaultView, boundaries, proximity, languag
 						<NavigationControl position="top-right" />
 						<Box sx={{ position: 'absolute', bottom: 25, left: 'calc(50% - 24px)' }}>
 							<Button variant="contained" onClick={removeAllPin}>
-								Elimina pin
+								{language === 'it' ? 'Elimina i Pin' : 'Delete Pins'}
 							</Button>
 						</Box>
 					</Map>

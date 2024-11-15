@@ -8,6 +8,7 @@ interface InputComboboxAsyncProps {
 	handleBlur: (event: React.FocusEvent<HTMLDivElement>) => void
 	handleChange: any
 	label?: string
+	language?: string
 	mediumLabel?: boolean
 	id?: string
 	multiple?: boolean
@@ -19,8 +20,20 @@ interface InputComboboxAsyncProps {
 }
 
 const InputComboboxAsync = (fieldRenderProps: InputComboboxAsyncProps) => {
-	const { state, handleBlur, getOptionArray, handleChange, label, id, multiple, getOptionLabel, mediumLabel, optional, helperText } =
-		fieldRenderProps
+	const {
+		state,
+		handleBlur,
+		getOptionArray,
+		handleChange,
+		label,
+		language,
+		id,
+		multiple,
+		getOptionLabel,
+		mediumLabel,
+		optional,
+		helperText
+	} = fieldRenderProps
 	const [inputValue, setInputValue] = React.useState<string | undefined>()
 	const valueDebounce = useDebounce(inputValue, 400)
 	const [open, setOpen] = React.useState(false)
@@ -79,8 +92,10 @@ const InputComboboxAsync = (fieldRenderProps: InputComboboxAsyncProps) => {
 						setInputValue(newInputValue)
 					}}
 					loading={loading}
-					loadingText="Caricamento in corso.."
-					noOptionsText="Scrivi un indirizzo per ricevere dei suggerimenti"
+					loadingText={language === 'it' ? 'Caricamento in corso...' : 'Loading in progress...'}
+					noOptionsText={
+						language === 'it' ? 'Scrivi un indirizzo per ricevere dei suggerimenti' : 'Type an address to get suggestions'
+					}
 					renderTags={(value: any[], getTagProps) =>
 						value.map((option: any, index: number) => {
 							const { key, ...tagProps } = getTagProps({ index })

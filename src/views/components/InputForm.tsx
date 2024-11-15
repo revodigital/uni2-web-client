@@ -126,6 +126,7 @@ const InputForm = <T, V>({
 							}
 						}}
 						label={label ?? ''}
+						language={language}
 						handleBlur={handleBlur}
 						multiple={false}
 					/>
