@@ -66,7 +66,7 @@ const InputComboboxAsync = (fieldRenderProps: InputComboboxAsyncProps) => {
 	}, [open, valueDebounce])
 
 	return (
-		<Box>
+		<Box key={id}>
 			{label && (
 				<InputLabel error={state.meta.errors && state.meta.errors.length > 0} sx={{ pb: 1, fontWeight: mediumLabel ? 500 : 400 }}>
 					{label}

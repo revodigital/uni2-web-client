@@ -75,7 +75,7 @@ const InputForm = <T, V>({
 
 	return (
 		<Box key={inputName} sx={{ pb: 2 }}>
-			<reactForm.Field name={inputName}>
+			<reactForm.Field name={inputName} key={inputName}>
 				{({ state, handleChange, handleBlur }) => (
 					<InputComboboxAsync
 						getOptionArray={getClientDriverOptionArray}
