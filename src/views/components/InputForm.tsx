@@ -89,10 +89,7 @@ const InputForm = <T, V>({
 								const [lng, lat] = selectedOption.value
 								// TODO: Qua dovrà esserci il postMessage per far comunicare la modifica!!
 								// eslint-disable-next-line no-restricted-globals
-								parent.postMessage(
-									{ action: 'updateInput', data: { inputId: htmlElementId, value: selectedOption.label } },
-									window.origin
-								)
+								parent.postMessage({ action: 'updateInput', data: { inputId: htmlElementId, value: selectedOption.label } })
 								setViewport((prevViewport: any) => {
 									return { ...prevViewport, longitude: lng, latitude: lat }
 								})
@@ -120,8 +117,9 @@ const InputForm = <T, V>({
 							} else {
 								// TODO: Qua dovrà esserci il postMessage per far comunicare la modifica!!
 								// htmlElement!.value = ''
+								// parent.postMessage({ action: 'updateInput', data: { inputId: htmlElementId, value: '' } }, window.origin)
 								// eslint-disable-next-line no-restricted-globals
-								parent.postMessage({ action: 'updateInput', data: { inputId: htmlElementId, value: '' } }, window.origin)
+								parent.postMessage({ action: 'updateInput', data: { inputId: htmlElementId, value: '' } })
 								setPointsData((prevPoints: any) => prevPoints.filter((point: any) => point.inputName !== inputName))
 							}
 						}}

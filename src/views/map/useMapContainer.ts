@@ -62,7 +62,7 @@ const useMapContainer = (
 			}
 			return null
 		} catch (error) {
-			console.error("GEOCODE ERROR:", error)
+			console.error('GEOCODE ERROR:', error)
 			return null
 		}
 	}
@@ -116,7 +116,7 @@ const useMapContainer = (
 				// Modifica il valore dell'input di Qualtrics
 				// TODO: Qua dovrà esserci il postMessage per far comunicare la modifica!!
 				// eslint-disable-next-line no-restricted-globals
-				parent.postMessage({ action: 'updateInput', data: { inputId: point.inputHtmlId, value: newValue.label } }, window.origin)
+				parent.postMessage({ action: 'updateInput', data: { inputId: point.inputHtmlId, value: newValue.label } })
 				// point.inputHtml!.value = newValue.label
 			}
 		}
@@ -162,7 +162,7 @@ const useMapContainer = (
 			// Modifica il valore dell'input di Qualtrics
 			// TODO: Qua dovrà esserci il postMessage per far comunicare la modifica!!
 			// eslint-disable-next-line no-restricted-globals
-			parent.postMessage({ action: 'updateInput', data: { inputId: newPoint.inputHtmlId, value: newValue.label } }, window.origin)
+			parent.postMessage({ action: 'updateInput', data: { inputId: newPoint.inputHtmlId, value: newValue.label } })
 			// inputHtml!.value = newValue.label
 		}
 	}
@@ -207,7 +207,7 @@ const useMapContainer = (
 			// Elimina i valori relativi agli input Qualtrics
 			// TODO: Qua dovrà esserci il postMessage per far comunicare la modifica vuota!!
 			// eslint-disable-next-line no-restricted-globals
-			parent.postMessage({ action: 'updateInput', data: { inputId: point.inputHtmlId, value: '' } }, window.origin)
+			parent.postMessage({ action: 'updateInput', data: { inputId: point.inputHtmlId, value: '' } })
 			// point.inputHtml!.value = ''
 		})
 		setPointsData([])
