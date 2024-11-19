@@ -67,6 +67,10 @@ const useMapContainer = (
 		}
 	}
 
+	/*
+	bbox,
+	proximity: prox
+	 */
 	const reverseGeocode = async (lng: any, lat: any) => {
 		try {
 			const response = await geocodingClient
@@ -75,9 +79,7 @@ const useMapContainer = (
 					limit: 1,
 					types: ['place', 'address', 'locality', 'neighborhood', 'poi'],
 					countries: ['it'],
-					language: lang,
-					bbox,
-					proximity: prox
+					language: lang
 				})
 				.send()
 
