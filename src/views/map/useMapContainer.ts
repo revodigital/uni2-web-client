@@ -152,6 +152,8 @@ const useMapContainer = (
 		setPointsData([...pointsData, newPoint])
 
 		const address = await reverseGeocode(lng, lat)
+		console.log(address)
+		console.log(inputName)
 
 		if (address && inputName) {
 			const newValue = {
