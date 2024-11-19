@@ -37,6 +37,7 @@ const MapContainer = ({ mapBoxToken, defaultView, boundaries, proximity, languag
 							const inputName = `name${el.elementIndex + 1}`
 							return (
 								<InputForm
+									key={inputName}
 									reactForm={reactForm}
 									setPointsData={setPointsData}
 									inputName={inputName}
