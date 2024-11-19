@@ -5,7 +5,7 @@ import markerMap from '../../assets/img/map/marker.svg'
 import InputForm from '../components/InputForm'
 import useMapContainer from './useMapContainer'
 
-const MapContainer = ({ mapBoxToken, defaultView, boundaries, proximity, language, inputHtmlArray }: any) => {
+const MapContainer = ({ mapBoxToken, defaultView, boundaries, proximity, language, inputHtmlArray, targetId }: any) => {
 	const mapRef = useRef<any>()
 	const [pointsData, setPointsData] = useState<any>([])
 
@@ -31,7 +31,7 @@ const MapContainer = ({ mapBoxToken, defaultView, boundaries, proximity, languag
 		<Box>
 			{!loadingPage && (
 				<>
-					<Box sx={{ width: '100%', pb: 3 }}>
+					<Box sx={{ width: '100%', pb: 3 }} id={`react-${targetId}`}>
 						{/* Da inserire ancora il ciclo for */}
 						{inputHtmlArray.map((el: any, index: any) => {
 							const inputName = `name${el.elementIndex + 1}`
@@ -53,6 +53,7 @@ const MapContainer = ({ mapBoxToken, defaultView, boundaries, proximity, languag
 					</Box>
 					<Map
 						{...viewport}
+						id={`map-${targetId}`}
 						ref={mapRef}
 						style={{ width: '100%', height: '60vh', borderRadius: '10px' }}
 						mapStyle="mapbox://styles/mapbox/streets-v11"
