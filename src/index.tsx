@@ -34,9 +34,10 @@ async function iframeRender(accessToken: any, target: HTMLElement, options: any)
 		presentationElements[0].style.display = 'none'
 	}
 
-	const iframeDoc = iframeContainer.contentWindow?.document
-	iframeDoc?.open()
-	iframeDoc?.writeln(`
+	iframeContainer.onload = () => {
+		const iframeDoc = iframeContainer.contentWindow?.document
+		iframeDoc?.open()
+		iframeDoc?.write(`
         <!DOCTYPE html>
         <html>
         <head>
@@ -48,8 +49,8 @@ async function iframeRender(accessToken: any, target: HTMLElement, options: any)
     		<link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" rel="stylesheet" type="text/css" />
     		<link href="https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.css" rel="stylesheet" />
     		
-    		<link href="https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.4.24/dist/style.css" rel="stylesheet" />
-    		<script src='https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.4.24/dist/bundle.js'></script>
+    		<link href="https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.4.25/dist/style.css" rel="stylesheet" />
+    		<script src='https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.4.25/dist/bundle.js'></script>
     		<style>
            
         </style>
@@ -77,10 +78,12 @@ async function iframeRender(accessToken: any, target: HTMLElement, options: any)
         </body>
         </html>
     `)
-	iframeDoc?.close()
+		iframeDoc?.close()
 
-	iframeContainer.onload = () => {
-		iframeContainer.contentWindow?.postMessage({ accessToken, options, targetId: target.id, inputHtmlArray }, '*')
+		setTimeout(() => {
+			iframeContainer.contentWindow?.postMessage({ accessToken, options, targetId: target.id, inputHtmlArray }, '*')
+			console.log('Iframe loaded')
+		}, 100)
 		// Nota: Sostituisci '*' con l'origine specifica per maggiore sicurezza
 	}
 	// directionContainer.style.display = 'none'
