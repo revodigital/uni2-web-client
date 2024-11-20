@@ -16,7 +16,6 @@ function iframeRender(accessToken: any, target: HTMLElement, options: any) {
 	iframeContainer.setAttribute('scrolling', 'no')
 
 	const directionContainer = target.querySelectorAll('[role*=presentation]')[0] as HTMLElement
-	target?.appendChild(iframeContainer)
 
 	const inputHTMLElements = directionContainer.getElementsByTagName('input')
 	const labelHTMLElements = directionContainer.getElementsByTagName('label')
@@ -34,54 +33,50 @@ function iframeRender(accessToken: any, target: HTMLElement, options: any) {
 		presentationElements[0].style.display = 'none'
 	}
 
-	const iframeDoc = iframeContainer.contentWindow?.document
-	iframeDoc?.open()
-	iframeDoc?.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <meta charset="utf-8" />
-            <title>Map</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	const iframeContent = `
+		<!DOCTYPE html>
+	<html>
+	<head>
+	<meta charset="utf-8" />
+		<title>${new Date().getTime()}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    		<!-- Includi eventuali librerie per la mappa, ad esempio Mapbox -->
-    		<link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" rel="stylesheet" type="text/css" />
-    		<link href="https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.css" rel="stylesheet" />
-    		
-    		<link href="https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.4.20/dist/style.css" rel="stylesheet" />
-    		<script src='https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.4.20/dist/bundle.js'></script>
-    		<style>
-           
-        </style>
-        </head>
-        <body>
-            <div id="MapContainer${target.id}"></div>
-           	<script>          	
-                const resizeObserver = new ResizeObserver(entries => {
-    				for (let entry of entries) {
-        				const height = entry.contentRect.height + 1;
-        				parent.postMessage({ action: 'resizeIframe', height }, '*');
-    				}
-				})
+	<!-- Includi eventuali librerie per la mappa, ad esempio Mapbox -->
+	<link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" rel="stylesheet" type="text/css" />
+	<link href="https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.css" rel="stylesheet" />
 
-				resizeObserver.observe(document.body)
-                
-        		window.addEventListener('message', function(event) {
-          			const { accessToken, options, targetId, inputHtmlArray } = event.data
-          			if (accessToken && options && targetId){ 
-                    	mapRender(accessToken, targetId, inputHtmlArray, options)                   
-                    }
-        		}, false)
-      		</script>
-        </body>
-        </html>
-    `)
-	iframeDoc?.close()
-	iframeContainer.onload = () => {
-		iframeContainer.contentWindow?.postMessage({ accessToken, options, targetId: target.id, inputHtmlArray }, '*')
-		// Nota: Sostituisci '*' con l'origine specifica per maggiore sicurezza
+	<link href="https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.4.21/dist/style.css" rel="stylesheet" />
+	<script src='https://cdn.jsdelivr.net/gh/revodigital/uni2-web-client@0.4.21/dist/bundle.js'></script>
+	<style>
+
+	</style>
+</head>
+	<body>
+	<div id="MapContainer${target.id}"></div>
+	<script>
+		const resizeObserver = new ResizeObserver(entries => {
+		for (let entry of entries) {
+		const height = entry.contentRect.height + 1;
+		console.log('height: ' + height)
+		parent.postMessage({ action: 'resizeIframe', height }, '*');
 	}
-	// directionContainer.style.display = 'none'
+	})
+
+		resizeObserver.observe(document.body)
+
+		window.addEventListener('message', function(event) {
+		const { accessToken, options, targetId, inputHtmlArray } = event.data
+		if (accessToken && options && targetId){
+		mapRender(accessToken, targetId, inputHtmlArray, options)
+	}
+	}, false)
+	</script>
+	</body>
+</html>
+  `
+	iframeContainer.srcdoc = iframeContent
+	target?.appendChild(iframeContainer)
+	iframeContainer.contentWindow?.postMessage({ accessToken, options, targetId: target.id, inputHtmlArray }, '*')
 
 	window.addEventListener(
 		'message',
