@@ -225,7 +225,7 @@ const useMapContainer = (
 				if (el.inputValueAddress && el.inputValueAddress !== '') {
 					// Esegui il geocoding dell'indirizzo
 					const coordinates = el.inputValueAddress.split(', ')
-					const address = await reverseGeocode(coordinates[0], coordinates[1])
+					const address = await reverseGeocode(+coordinates[0], +coordinates[1])
 					if (address) {
 						const newValue = {
 							label: address,
