@@ -249,7 +249,7 @@ const useMapContainer = (
 					newInitialFormValues[inputName] = null
 				}
 			}
-
+			console.log(newPointsData)
 			// Imposta i valori nel form
 			setInitialState(newInitialFormValues)
 			// Aggiorna lo stato dei punti
