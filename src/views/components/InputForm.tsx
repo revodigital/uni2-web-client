@@ -89,7 +89,10 @@ const InputForm = <T, V>({
 								const [lng, lat] = selectedOption.value
 								// TODO: Qua dovrà esserci il postMessage per far comunicare la modifica!!
 								// eslint-disable-next-line no-restricted-globals
-								parent.postMessage({ action: 'updateInput', data: { inputId: htmlElementId, value: selectedOption.label } })
+								parent.postMessage({
+									action: 'updateInput',
+									data: { inputId: htmlElementId, value: [lng, lat].join(', ') }
+								})
 								setViewport((prevViewport: any) => {
 									return { ...prevViewport, longitude: lng, latitude: lat }
 								})

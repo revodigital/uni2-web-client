@@ -118,7 +118,7 @@ const useMapContainer = (
 				// Modifica il valore dell'input di Qualtrics
 				// TODO: Qua dovrà esserci il postMessage per far comunicare la modifica!!
 				// eslint-disable-next-line no-restricted-globals
-				parent.postMessage({ action: 'updateInput', data: { inputId: point.inputHtmlId, value: newValue.label } })
+				parent.postMessage({ action: 'updateInput', data: { inputId: point.inputHtmlId, value: newValue.value.join(', ') } })
 				// point.inputHtml!.value = newValue.label
 			}
 		}
@@ -152,8 +152,6 @@ const useMapContainer = (
 		setPointsData([...pointsData, newPoint])
 
 		const address = await reverseGeocode(lng, lat)
-		console.log(address)
-		console.log(inputName)
 
 		if (address && inputName) {
 			const newValue = {
@@ -166,7 +164,7 @@ const useMapContainer = (
 			// Modifica il valore dell'input di Qualtrics
 			// TODO: Qua dovrà esserci il postMessage per far comunicare la modifica!!
 			// eslint-disable-next-line no-restricted-globals
-			parent.postMessage({ action: 'updateInput', data: { inputId: newPoint.inputHtmlId, value: newValue.label } })
+			parent.postMessage({ action: 'updateInput', data: { inputId: newPoint.inputHtmlId, value: newValue.value.join(', ') } })
 			// inputHtml!.value = newValue.label
 		}
 	}
@@ -224,21 +222,21 @@ const useMapContainer = (
 
 			for (const el of inputHtmlArray) {
 				const inputName = `name${el.elementIndex + 1}`
-				if (el.inputValueAddress) {
+				if (el.inputValueAddress && el.inputValueAddress !== '') {
 					// Esegui il geocoding dell'indirizzo
-					const address = el.inputValueAddress
-					const geocodedData = await geocodeAddress(address)
-					if (geocodedData) {
-						const [lng, lat] = geocodedData.coordinates
-						// Imposta il valore iniziale nel form
-						newInitialFormValues[inputName] = {
-							label: geocodedData.address,
-							value: [lng, lat]
+					const coordinates = el.inputValueAddress.split(', ')
+					const address = await reverseGeocode(coordinates[0], coordinates[1])
+					if (address) {
+						const newValue = {
+							label: address,
+							value: coordinates
 						}
+						// Imposta il valore iniziale nel form
+						newInitialFormValues[inputName] = newValue
 						// Aggiungi il marker ai punti
 						newPointsData.push({
 							id: Date.now() + Math.random(), // Assicura un ID univoco
-							coordinates: [lng, lat],
+							coordinates: newValue.value,
 							inputName,
 							inputHtmlId: el.htmlElementId
 						})
