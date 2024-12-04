@@ -118,7 +118,7 @@ const useMapContainer = (
 				// Modifica il valore dell'input di Qualtrics
 				// TODO: Qua dovrà esserci il postMessage per far comunicare la modifica!!
 				// eslint-disable-next-line no-restricted-globals
-				parent.postMessage({ action: 'updateInput', data: { inputId: point.inputHtmlId, value: newValue.value.join(', ') } })
+				parent.postMessage({ action: 'updateInput', data: { inputId: point.inputHtmlId, value: newValue.value.join(';') } })
 				// point.inputHtml!.value = newValue.label
 			}
 		}
@@ -164,7 +164,7 @@ const useMapContainer = (
 			// Modifica il valore dell'input di Qualtrics
 			// TODO: Qua dovrà esserci il postMessage per far comunicare la modifica!!
 			// eslint-disable-next-line no-restricted-globals
-			parent.postMessage({ action: 'updateInput', data: { inputId: newPoint.inputHtmlId, value: newValue.value.join(', ') } })
+			parent.postMessage({ action: 'updateInput', data: { inputId: newPoint.inputHtmlId, value: newValue.value.join(';') } })
 			// inputHtml!.value = newValue.label
 		}
 	}
@@ -224,7 +224,7 @@ const useMapContainer = (
 				const inputName = `name${el.elementIndex + 1}`
 				if (el.inputValueAddress && el.inputValueAddress !== '') {
 					// Esegui il geocoding dell'indirizzo
-					const coordinates = el.inputValueAddress.split(', ')
+					const coordinates = el.inputValueAddress.split(';')
 					const address = await reverseGeocode(+coordinates[0], +coordinates[1])
 					if (address) {
 						const newValue = {

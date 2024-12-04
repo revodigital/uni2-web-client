@@ -91,7 +91,7 @@ const InputForm = <T, V>({
 								// eslint-disable-next-line no-restricted-globals
 								parent.postMessage({
 									action: 'updateInput',
-									data: { inputId: htmlElementId, value: [lng, lat].join(', ') }
+									data: { inputId: htmlElementId, value: [lng, lat].join(';') }
 								})
 								setViewport((prevViewport: any) => {
 									return { ...prevViewport, longitude: lng, latitude: lat }
